@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		8D499DAE1A1EFE9600230AE6 /* main.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D499DAD1A1EFE9600230AE6 /* main.swift */; };
+		8D9A08591A1F9AC100F659AB /* UIImageEffects.m in Sources */ = {isa = PBXBuildFile; fileRef = 8D9A08581A1F9AC100F659AB /* UIImageEffects.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -25,6 +26,10 @@
 /* Begin PBXFileReference section */
 		8D499DAA1A1EFE9600230AE6 /* cliptest */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = cliptest; sourceTree = BUILT_PRODUCTS_DIR; };
 		8D499DAD1A1EFE9600230AE6 /* main.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = main.swift; sourceTree = "<group>"; };
+		8D9A08561A1F9AC000F659AB /* cliptest-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "cliptest-Bridging-Header.h"; sourceTree = "<group>"; };
+		8D9A08571A1F9AC100F659AB /* UIImageEffects.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UIImageEffects.h; sourceTree = "<group>"; };
+		8D9A08581A1F9AC100F659AB /* UIImageEffects.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UIImageEffects.m; sourceTree = "<group>"; };
+		8D9A085A1A1FF02E00F659AB /* MyPlayground.playground */ = {isa = PBXFileReference; lastKnownFileType = file.playground; name = MyPlayground.playground; path = ../MyPlayground.playground; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -57,7 +62,11 @@
 		8D499DAC1A1EFE9600230AE6 /* cliptest */ = {
 			isa = PBXGroup;
 			children = (
+				8D9A085A1A1FF02E00F659AB /* MyPlayground.playground */,
 				8D499DAD1A1EFE9600230AE6 /* main.swift */,
+				8D9A08571A1F9AC100F659AB /* UIImageEffects.h */,
+				8D9A08581A1F9AC100F659AB /* UIImageEffects.m */,
+				8D9A08561A1F9AC000F659AB /* cliptest-Bridging-Header.h */,
 			);
 			path = cliptest;
 			sourceTree = "<group>";
@@ -118,6 +127,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				8D9A08591A1F9AC100F659AB /* UIImageEffects.m in Sources */,
 				8D499DAE1A1EFE9600230AE6 /* main.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -203,14 +213,21 @@
 		8D499DB21A1EFE9600230AE6 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				CLANG_ENABLE_MODULES = YES;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks @loader_path/../Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OBJC_BRIDGING_HEADER = "cliptest/cliptest-Bridging-Header.h";
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 			};
 			name = Debug;
 		};
 		8D499DB31A1EFE9600230AE6 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				CLANG_ENABLE_MODULES = YES;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks @loader_path/../Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OBJC_BRIDGING_HEADER = "cliptest/cliptest-Bridging-Header.h";
 			};
 			name = Release;
 		};
@@ -233,6 +250,7 @@
 				8D499DB31A1EFE9600230AE6 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
