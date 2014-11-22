@@ -13,14 +13,14 @@ func imToPng(image:NSImage!) -> Bool {
     if image.representations.count > 0 {
         println("numerous representations!")
         
-        if let ir = image!.representations[0] as? NSBitmapImageRep{
-            ir.representationUsingType(
-                NSBitmapImageFileType.NSPNGFileType,
-                properties: [:])?
-                .writeToFile("~/Desktop/fuzzzz.png".stringByExpandingTildeInPath, atomically: true)
+        if let imageData = image!.TIFFRepresentation? {
+            println("going tiff mode!")
+            let rep = NSBitmapImageRep(data: imageData)
+            let pngData = rep?.representationUsingType(
+                NSBitmapImageFileType.NSPNGFileType, properties: [:])
+            pngData?.writeToFile("~/Desktop/blah.png".stringByExpandingTildeInPath, atomically: false)
             return true
         }
-
     }
     
     return false
