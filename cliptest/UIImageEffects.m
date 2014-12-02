@@ -147,10 +147,24 @@
         useOpaqueContext = YES;
     else
         useOpaqueContext = NO;
-//    UIGraphicsBeginImageContextWithOptions(outputImageRectInPoints.size, useOpaqueContext, inputImageScale);
-    //    CGContextRef outputContext = UIGraphicsGetCurrentContext();
-    NSGraphicsContext *ctx =  [NSGraphicsContext graphicsContextWithAttributes:@{}];
-    CGContextRef outputContext = (__bridge CGContextRef)(ctx); //UIGraphicsGetCurrentContext();
+    NSBitmapImageRep *birp = [[NSBitmapImageRep alloc]
+                              initWithBitmapDataPlanes:NULL
+                              pixelsWide:inputImage.size.width
+                              pixelsHigh:inputImage.size.height
+                              bitsPerSample:8
+                              samplesPerPixel:4
+//                            TODO(marcos): use useOpaqueContext here? vv
+                              hasAlpha:YES
+                              isPlanar:NO
+                              colorSpaceName:NSDeviceRGBColorSpace
+                              bitmapFormat:NSAlphaFirstBitmapFormat
+                              bytesPerRow:0
+                              bitsPerPixel:0];
+
+    NSGraphicsContext *ctx = [NSGraphicsContext graphicsContextWithBitmapImageRep:birp];
+    [NSGraphicsContext saveGraphicsState];
+    [NSGraphicsContext setCurrentContext:ctx];
+    CGContextRef outputContext = [ctx graphicsPort];
     
     CGContextScaleCTM(outputContext, 1.0, -1.0);
     CGContextTranslateCTM(outputContext, 0, -outputImageRectInPoints.size.height);
@@ -292,11 +306,12 @@
     }
 #endif
     
-    // Output image is ready.
-    //    NSImage *outputImage = UIGraphicsGetImageFromCurrentImageContext();
-    //    UIGraphicsEndImageContext();
-    CGImageRef ir = CGBitmapContextCreateImage(outputContext);
-    NSImage *outputImage = [[NSImage alloc] initWithCGImage:ir size:inputImage.size];
+    // Output image is ready, pop context
+    [NSGraphicsContext restoreGraphicsState];
+
+    // make the output image and add the new representation to it
+    NSImage *outputImage = [[NSImage alloc] initWithSize:inputImage.size];
+    [outputImage addRepresentation:birp];
  
     return outputImage;
 #undef ENABLE_BLUR
