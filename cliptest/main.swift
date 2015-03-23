@@ -35,7 +35,6 @@ func blurro() {
 
         let pasteboardData = pb.dataForType(NSPasteboardTypePNG)!
         let pasteboardImage = NSImage(data: pasteboardData)
-        // i clearly did something wrong here
         let blurryImage = UIImageEffects.imageByApplyingLightEffectToImage(pasteboardImage)
         
         imToPng(blurryImage)

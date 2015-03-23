@@ -166,9 +166,6 @@
     [NSGraphicsContext setCurrentContext:ctx];
     CGContextRef outputContext = [ctx graphicsPort];
     
-    CGContextScaleCTM(outputContext, 1.0, -1.0);
-    CGContextTranslateCTM(outputContext, 0, -outputImageRectInPoints.size.height);
-    
     if (hasBlur || hasSaturationChange)
     {
         vImage_Buffer effectInBuffer;
